@@ -1,0 +1,43 @@
+
+
+.results-container {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+.cell-btn{
+    border: none;
+    background: transparent;
+
+}
+
+
+.hospital-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.hospital-table th, .hospital-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.hospital-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.hospital-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.hospital-table tr:hover {
+    background-color: #f1f1f1;
+}

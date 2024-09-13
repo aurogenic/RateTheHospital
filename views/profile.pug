@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/index.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button type="submit" class="btn" style="margin-right: 0.5rem;" onclick="window.location.href = '/searchpage';">Search</button>
+                if user_id != 0
+                    <button class="btn" onclick="window.location.href = '/profile';">Profile</button>
+                else
+                    <button class="btn" onclick="window.location.href = '/login';">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div id="mid">
+        <section class="section-container">
+
+        </section>
+    </div>
+    script(src="../static/script.js")
+
+</body>
+</html>

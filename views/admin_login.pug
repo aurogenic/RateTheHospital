@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Admin Login</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/login.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="../static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button class="btn" onclick="window.location.href = '/user/login';">User Login</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="mid">
+        <section class="section-container login-container" >
+            <h2 class="section-head">Hospital Admin Login</h2>
+            <form id="hospitalLoginForm">
+                <div class="input-pair">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="input-field" placeholder="Enter hospital admin email" required>
+                </div>
+                <div class="input-pair">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="input-field" placeholder="Enter your password" required>
+                </div>
+                <button type="button" class="btn" onclick="hospitalLogin(); return false">Login</button>
+                <div id="error-message" class="error-message"></div>
+            </form>
+        </section>
+    </div>
+
+    script.
+        function hospitalLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (!password || !email) return;
+
+            fetch('/admin/hospital_login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    document.getElementById('error-message').textContent = data.message || 'Login failed.';
+                } else {
+                    localStorage.setItem('hospital_id', data.hospital.hospital_id);
+                    window.location.href = '/dashboard';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+            });
+        }
+    script(src="../static/script.js")
+</body>
+</html>

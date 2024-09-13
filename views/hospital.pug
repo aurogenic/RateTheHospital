@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital View</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/ratings.css">
+    <link rel="stylesheet" href="../static/hospital.css">
+</head>
+<body>
+    <nav class="navbar" id="navBar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button type="submit" class="btn" style="margin-right: 0.5rem;" onclick="window.location.href = '/searchpage';">Search</button>
+                if user_id != 0
+                    <button class="btn" onclick="window.location.href = '/profile';">Profile</button>
+                else
+                    <button class="btn" onclick="window.location.href = '/login';">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div id="mid">
+        <div class="section-container hospital-container">
+            <img src="../static/th.jpg" alt="Hospital Image" class="hospital-image">
+            <h1 class="hospital-name">#{hospital.name}</h1>
+            <p class="hospital-address">#{hospital.address}</p>
+            <p class="hospital-type">Type: #{hospital.hospital_type}</p>
+            <div class="hospital-stats">
+                <div class="stat-item">
+                    <p class="stat-number">#{hospital.total_beds}</p>
+                    <p class="stat-label">Beds</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-number">#{hospital.total_doctors}</p>
+                    <p class="stat-label">Doctors</p>
+                </div>
+                <div class="stat-item">
+                    <p class="stat-number">#{hospital.total_nurses}</p>
+                    <p class="stat-label">Nurses</p>
+                </div>
+            </div>
+            <div class="hospital-description">
+                
+                <p>#{hospital.description}</p>
+            </div>
+            <div class="list-container">
+                <div class="cont">
+                    <h3>facilities:</h3>
+                    each i in JSON.parse(hospital.facilities)
+                        <h7 style="display: block;">#{i}</h7>
+                </div>
+                <div class="cont">
+                    <h3>specialists:</h3>
+                    each i in hospital.specialists
+                        <h7 style="display: block;">#{i}</h7>
+                </div>
+            </div>
+            <div class="rating-container">
+                <span class="label">Overall Rating:</span>
+                <div id="overall-stars" class="stars"></div>
+                <span id="overall-rating-value">0.0</span>
+            </div>
+            <button type="button" class="btn" onclick="window.location.href = '/writefeedback?id=#{parseInt(hospital.hospital_id)}'">give feedback</button>
+        </div>
+        <section class="section-container">
+            <h3>Category wise ratings<h3>
+            <div id="category-ratings">
+            <!-- Categories with stars will be dynamically injected here -->
+            </div>
+        </section>  
+        </div>
+
+
+
+    </div>
+    <!-- script(src="../static/script.js") -->
+
+    script. 
+        async function getHospitalRating(hospital_id) {
+            try {
+                const response = await fetch(`/get_hospital_rating?hospital_id=${hospital_id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    displayRatings(result.data)
+                } else {
+                    console.error('Failed to fetch hospital rating');
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error fetching hospital rating:', error);
+                return null;
+            }
+        }
+        function displayRatings(data) {
+            // Set the overall rating
+            const overallRatingValue = parseFloat(data.overall_avg).toFixed(1);
+            document.getElementById('overall-rating-value').textContent = overallRatingValue;
+            fillStars(document.getElementById('overall-stars'), data.overall_avg);
+
+            // Display category-wise ratings
+            const categoryRatings = data.ratings;
+            const categoryContainer = document.getElementById('category-ratings');
+            categoryContainer.innerHTML = ''; // Clear previous content
+
+            for (const category in categoryRatings) {
+                const ratingValue = categoryRatings[category];
+                const categoryDiv = document.createElement('div');
+                categoryDiv.classList.add('category-rating');
+
+                categoryDiv.innerHTML = `
+                    <label>${category}:</label>
+                    <div class="stars" data-category="${category}"></div>
+                `;
+
+                categoryContainer.appendChild(categoryDiv);
+                fillStars(categoryDiv.querySelector('.stars'), ratingValue);
+            }
+        }
+
+        function fillStars(container, rating) {
+            const maxStars = 5;
+            const stars = [];
+
+            for (let i = 1; i <= maxStars; i++) {
+                const star = document.createElement('span');
+                star.textContent = '★';
+                star.classList.add(i <= rating ? 'filled' : 'empty');
+                container.appendChild(star);
+            }
+        }
+        getHospitalRating(`#{hospital.hospital_id}`)
+
+
+</body>
+</html>

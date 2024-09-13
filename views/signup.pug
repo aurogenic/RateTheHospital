@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/login.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button class="btn" onclick="window.location.href = '/add_hospital';"><span>Hospital register<span></button>
+            </div>
+        </div>
+    </nav>
+<div id="mid">
+    <section class="section-container login-container">
+        <h2 class="section-head">Create an Account</h2>
+        <form id="signupForm">
+            <div class="input-pair">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="input-field" placeholder="Enter your username" required>
+            </div>
+            <div class="input-pair">
+                <label for="mobile">Mobile:</label>
+                <input type="text" id="mobile" name="mobile" class="input-field" placeholder="Enter your mobile number" required>
+            </div>
+            <div class="input-pair">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="input-field" placeholder="Enter your password" required>
+            </div>
+            <div class="input-pair">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" class="input-field" placeholder="Confirm your password" required>
+            </div>
+            <div id="password-strength" class="password-strength"></div>
+            <button type="button" class="btn" onclick="signup(); return false">Sign Up</button>
+            <a href="/login"  style="display:block; text-align:center">already signed up? login here</a>
+            <div id="error-message" class="error-message"></div>
+        </form>
+    </section>
+</div>
+    script.
+        function checkPasswordStrength(password) {
+            const strength = document.getElementById('password-strength');
+            const regex = {
+                lower: /[a-z]/,
+                upper: /[A-Z]/,
+                number: /[0-9]/,
+                special: /[!@#$%^&*(),.?":{}|<>]/,
+            };
+            let score = 0;
+            
+            if (regex.lower.test(password)) score++;
+            if (regex.upper.test(password)) score++;
+            if (regex.number.test(password)) score++;
+            if (regex.special.test(password)) score++;
+            
+            if (score === 4 && password.length >= 8) {
+                return true;
+            } else {
+                strength.textContent = 'Password must be at least 8 characters long and include a mix of upper/lowercase letters, numbers, and special characters.';
+                strength.style.color = 'red';
+                return false;
+            }
+        }
+
+        async function signup() {
+            const username = document.getElementById('username').value;
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('error-message').textContent = 'Passwords do not match.';
+                return;
+            }
+
+            if (!checkPasswordStrength(password)) {
+                document.getElementById('error-message').textContent = 'Password is too weak.';
+                return;
+            }
+
+            try {
+                const response = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, mobile, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    window.location.href = '/login';
+                } else {
+                    document.getElementById('error-message').textContent = result.error || 'An error occurred. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+            }
+        }
+
+    script(src="../static/script.js")
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Search</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/searchpage.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button type="submit" class="btn" style="margin-right: 0.5rem;" onclick="window.location.href = '/searchpage';">Search</button>
+                if user_id != 0
+                    <button class="btn" onclick="window.location.href = '/profile';">Profile</button>
+                else
+                    <button class="btn" onclick="window.location.href = '/login';">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div id="mid">
+        <h1>Find Hospitals</h1>
+        <section class="section-container">
+            <form id="searchForm" class="form-container">
+                <input type="text" id="exp" name="exp" class="input-field search-bar" required placeholder="Enter hospital name or address">
+                <button type="button" class="btn" onclick="searchByExpression(); return false">Search</button>
+            </form>
+            <form id="locateForm" class="form-container">
+                <div class="hor-container">
+                    <div class="input-pair">
+                        <label for="state">State:</label>
+                        <select id="state" name="state" class="input-field" required>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-pair">
+                        <label for="district">District:</label>
+                        <select id="district" name="district" class="input-field" required>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+                    <div class="input-pair">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" class="input-field" placeholder="Enter 'all' for any city" required>
+                    </div>
+                    <button type="button" class="btn" onclick="searchByLocation()">Search</button>
+                    <button type="button" class="btn" onclick="searchNearby()">Find Nearby Hospitals</button>
+                </div>
+    
+    
+            </form>
+        </section>
+        <section  class="section-container" style="display:none">
+            <div id="hospitalTableContainer" class="table-container"></div>
+        </section>
+    </div>
+
+    script(src="../static/searchpage.js")
+    script(src="../static/script.js")
+
+</body>
+</html>

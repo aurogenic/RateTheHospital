@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Review</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/feedback.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button type="submit" class="btn" style="margin-right: 0.5rem;" onclick="window.location.href = '/searchpage';">Search</button>
+                if user_id != 0
+                    <button class="btn" onclick="window.location.href = '/profile';">Profile</button>
+                else
+                    <button class="btn" onclick="window.location.href = '/login';">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div id="mid">
+        <form id="review-form" class="section-container" method="POST" enctype="multipart/form-data">
+            <h1>#{hospital.name}</h1>
+            <h3>Feedback Form</h3>
+            <div class="input-pair">
+                <label for="overall-rating">Overall Rating:</label>
+                <div id="overall-rating" class="rating">
+                    <!-- Rating stars will be inserted here by JavaScript -->
+                </div>
+            </div>
+            <div class="input-pair">
+                <label for="review-content">Review Content:</label>
+                <textarea id="review-content" name="review_content" class="input-field" rows="4" required></textarea>
+            </div>
+            <div class="file-upload-container">
+                <label for="file-upload">Upload Files:</label>
+                <input type="file" id="file-upload" name="attachments" multiple>
+            </div>
+            <div id="category-ratings">
+                <!-- Category ratings will be inserted here by JavaScript -->
+            </div>
+            <div class="custom-category-container">
+                <input type="text" id="custom-category" placeholder="Add custom category">
+                <button type="button" class="add-category-btn" onclick="addCustomCategory()">Add Category</button>
+            </div>
+            <button type="submit" class="btn-submit">Submit Review</button>
+        </form>
+    </div>
+
+
+    script. 
+        var userId = `#{user_id}`;
+        var hospital_name = `#{hospital.name}`
+        var hospitalId = `#{hospital.hospital_id}`;
+        var defaultCategories = ['Cleanliness', 'Staff', 'Facilities'];
+    
+    each i in hospital.facilities 
+        script defaultCategories.push(`#{i}`)
+    each i in hospital.specialists
+        script defaultCategories.push(`#{i}`)
+    script(src="../static/feedback.js")
+    script(src="../static/script.js")
+
+</body>
+</html>

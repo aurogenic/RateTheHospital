@@ -1,0 +1,47 @@
+
+.login-container {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 480px;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.login-container .input-field {
+    margin-bottom: 15px;
+}
+
+.login-container .btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    animation: both ease-in-out 2s; 
+    cursor: pointer;
+}
+
+
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .login-container{
+        min-width: 0px;
+    }
+    .input-field {
+        max-width: 10rem;
+      }
+    
+}

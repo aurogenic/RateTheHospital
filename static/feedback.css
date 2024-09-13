@@ -1,0 +1,142 @@
+/* New CSS for Review Form Enhancement */
+
+/* Rating Stars */
+.rating {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.rating span {
+    font-size: 2.5rem;
+    color: #ddd;
+    transition: color 0.3s;
+}
+
+.rating span.selected,
+.rating span:hover {
+    color: #f4b942;
+}
+
+/* File Upload */
+.file-upload-container {
+    display: flex;
+    gap: .5rem;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload label {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.file-upload label:hover {
+    background-color: #45a049;
+}
+
+/* Form Fields */
+.section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+
+.input-field {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    width: 100%;
+}
+
+.input-field:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* Buttons */
+.btn-submit {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.btn-submit:active {
+    background-color: #388e3c;
+    transform: scale(0.98);
+}
+
+/* Custom Category Input */
+.custom-category-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.custom-category-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.custom-category-container input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.add-category-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.add-category-btn:hover {
+    background-color: #0056b3;
+}
+
+.input-pair{
+    justify-content: flex-start;
+}
+
+.input-pair label{
+    width: auto;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .form-container {
+        gap: 15px;
+    }
+
+    .rating span {
+        font-size: 1.5rem;
+    }
+}

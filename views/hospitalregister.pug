@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Registration</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/hr.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button type="submit" class="btn" style="margin-right: 0.5rem;" onclick="window.location.href = '/searchpage';">Search</button>
+                <button class="btn" onclick="window.location.href = '/admin_login';">Hospital Login</button>
+
+            </div>
+        </div>
+    </nav>
+    <div id="mid">
+        <h1>Hospital Registration</h1>
+        <section class="section-container register-container">
+            <form id="hospitalForm">
+                <div class="input-pair">
+                    <label for="name">Hospital Name:</label>
+                    <input type="text" id="name" name="name" class="input-field" required>
+                </div>
+                <div class="input-pair">
+                    <label for="lat">Latitude:</label>
+                    <input type="text" id="lat" name="lat" class="input-field" required>
+                </div>
+                <div class="input-pair">
+                    <label for="lon">Longitude:</label>
+                    <input type="text" id="lon" name="lon" class="input-field" required>
+                </div>
+                <button class="btn" onclick="fetchCoordinates()">Fetch Coordinates</button>
+
+                <div class="input-pair">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" class="input-field" required>
+                </div>                
+                <div class="input-pair">
+                    <label for="state">State:</label>
+                    <select id="state" name="state" class="input-field" required>
+                        <option value="">Select State</option>
+                    </select>
+                </div>
+                <div class="input-pair">
+                    <label for="district">District:</label>
+                    <select id="district" name="district" class="input-field" required>
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+                <div class="input-pair">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" class="input-field" placeholder="Enter city" required>
+                </div>
+                <div class="input-pair">
+                    <label for="hospital_type">Hospital Type:</label>
+                    <select id="hospital_type" name="hospital_type" class="input-field" required>
+                        <!-- Options will be added dynamically -->
+                    </select>
+                </div>
+                <div class="input-pair">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" class="input-field" placeholder="Enter hospital description" required></textarea>
+                </div>
+                <div class="input-pair">
+                    <label for="total_beds">Total Beds:</label>
+                    <input type="number" id="total_beds" name="total_beds" class="input-field" placeholder="Enter total number of beds" required>
+                </div>
+                <div class="input-pair">
+                    <label for="total_doctors">Total Doctors:</label>
+                    <input type="number" id="total_doctors" name="total_doctors" class="input-field" placeholder="Enter total number of doctors" required>
+                </div>
+                <div class="input-pair">
+                    <label for="total_nurses">Total Nurses:</label>
+                    <input type="number" id="total_nurses" name="total_nurses" class="input-field" placeholder="Enter total number of nurses" required>
+                </div>
+                <div class="input-pair">
+                    <label for="speciality">Speciality:</label>
+                    <ul id="specialityList" class="input-field">
+                        <!-- Specialities will be added here -->
+                    </ul>
+                    <input type="text" id="specialityInput" class="input-field" placeholder="Add a speciality">
+                    <button type="button" class="btn" onclick="addSpeciality()">Add Speciality</button>
+                </div>
+                <div class="input-pair">
+                    <label for="facilities">Facilities:</label>
+                    <ul id="facilitiesList" class="input-field">
+                        <!-- Facilities will be added here -->
+                    </ul>
+                    <input type="text" id="facilityInput" class="input-field" placeholder="Add a facility">
+                    <button type="button" class="btn" onclick="addFacility()">Add Facility</button>
+                </div>
+                <div class="input-pair">
+                    <label for="contact_number">Contact Number:</label>
+                    <input type="text" id="contact_number" name="contact_number" class="input-field" required>
+                </div>
+                <div class="input-pair">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="input-field" required>
+                </div>
+                <div class="input-pair">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="input-field" required>
+                </div>
+                <button type="button" class="btn" onclick="registerHospital()">Register Hospital</button>
+                <div id="error-message" class="error-message"></div>
+            </form>
+        </section>
+    </div>
+
+    script(src = "../static/hr.js")
+    script(src="../static/script.js")
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/login.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button class="btn" onclick="window.location.href = '/admin_login';">Hospital Login</button>
+                
+            </div>
+        </div>
+    </nav>
+    
+    <div id="mid">
+        <section class="section-container login-container" >
+            <h2 class="section-head">Welcome back, Login</h2>
+            <form id="loginForm">
+                <div class="input-pair">
+                    <label for="mobile">Mobile:</label>
+                    <input type="text" id="mobile" name="mobile" class="input-field" placeholder="Enter your mobile number" required>
+                </div>
+                <div class="input-pair">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="input-field" placeholder="Enter your password" required>
+                </div>
+                <button type="button" class="btn" onclick="login(); return false">Login</button>
+                <a href="/signup"  style="display:block; text-align:center">new user? sign-up here</a>
+                <div id="error-message" class="error-message"></div>
+            </form>
+        </section>
+    </div>
+
+    script.
+        function login() {
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
+            if (!password || !mobile) return;
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mobile, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.err) {
+                    document.getElementById('error-message').textContent = data.err;
+                } else {
+                    localStorage.setItem('token', data.token); // Save token in local storage
+                    window.location.href = '/'; // Redirect to home or dashboard
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+            });
+        }
+
+    script(src="../static/script.js")
+    
+
+</body>
+</html>

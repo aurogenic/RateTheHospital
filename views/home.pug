@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/index.css">
+
+    <link rel="stylesheet" href="../static/home.css">
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container" id="navBar">
+            <div class="logo">
+                <a href="/">
+                    <img src="./static/assets/logo.png" alt="RateTheHospital Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <button type="submit" class="btn" style="margin-right: 0.5rem;" onclick="window.location.href = '/searchpage';">Search</button>
+                if user_id != 0
+                    <button class="btn" onclick="window.location.href = '/profile';">Profile</button>
+                else
+                    <button class="btn" onclick="window.location.href = '/login';">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div id="mid">
+        <div class="section-container">
+            <h1>Search For Hospitals</h1>
+            <button class="btn" onclick="window.location.href='/searchpage'">search now</button>
+        </section>
+    <div class="container">
+        <div class="section">
+            <h3>Why Rate The Hospital?</h3>
+            <p>We provide a platform where users can share their experiences and reviews on various parameters for government hospitals. This helps others make informed decisions and encourages hospitals to improve their services.</p>
+        </div>
+        <div class="section">
+            <h3>Features</h3>
+            <ul>
+                <li>Detailed reviews and ratings</li>
+                <li>Filter hospitals by location and services</li>
+                <li>Anonymous feedback for privacy</li>
+                <li>Insights and trends on hospital performance</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Ratings of Hospitals Across Indian States and UTs</h3>
+            <div class="bar-chart">
+                <canvas id="hospitalRatingsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2024 Your Organization. All rights reserved.</p>
+    </div>
+
+    script(src="../static/home.js")    
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    script(src="../static/script.js")
+
+</body>
+</html>
