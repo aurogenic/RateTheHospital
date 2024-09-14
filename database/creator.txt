@@ -1,0 +1,63 @@
+User Table:
+
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `mobile` varchar(15) DEFAULT NULL,
+  `password` varchar(16) DEFAULT NULL,
+  `is_verified` tinyint DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Hospital Table:
+CREATE TABLE `hospitals` (
+  `hospital_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `lat` double DEFAULT NULL,
+  `lon` double DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `description` text,
+  `location` json DEFAULT NULL,
+  `hospital_type` varchar(50) DEFAULT NULL,
+  `total_beds` int DEFAULT NULL,
+  `total_doctors` int DEFAULT NULL,
+  `total_nurses` int DEFAULT NULL,
+  `facilities` text,
+  `contact_number` varchar(15) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(16) DEFAULT NULL,
+  `specialists` json DEFAULT NULL,
+  PRIMARY KEY (`hospital_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+reviews table
+
+CREATE TABLE `reviews` (
+  `review_id` int NOT NULL AUTO_INCREMENT,
+  `hospital_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `review_content` text,
+  `attachments` json DEFAULT NULL,
+  `ratings` json DEFAULT NULL,
+  `overall_rating` double DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`review_id`),
+  KEY `hospital_id` (`hospital_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `hospital_id` FOREIGN KEY (`hospital_id`) REFERENCES `hospitals` (`hospital_id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Average  ratings
+CREATE TABLE `average_ratings` (
+  `hospital_id` int NOT NULL,
+  `ratings` json DEFAULT NULL,
+  `overall_avg` decimal(3,2) DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`hospital_id`),
+  CONSTRAINT `hospital_id__` FOREIGN KEY (`hospital_id`) REFERENCES `hospitals` (`hospital_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
